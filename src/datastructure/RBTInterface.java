@@ -9,6 +9,6 @@ package datastructure;
  *
  * @author diegoa.torres
  */
-public interface RBTInterfacer {
+public interface RBTInterface {
     
 }
