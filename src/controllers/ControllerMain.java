@@ -1,4 +1,4 @@
-package Controllers;
+package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,5 +77,13 @@ public class ControllerMain implements Initializable {
         fl.setController(controllerUpdate);
         Pane pane = fl.load();
         bp.setCenter(pane);
+    }
+
+    public Database getDb() {
+        return db;
+    }
+
+    public void setDb(Database db) {
+        this.db = db;
     }
 }

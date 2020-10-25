@@ -6,7 +6,7 @@ package ui;
  * and open the template in the editor.
  */
 
-import Controllers.ControllerMain;
+import controllers.ControllerMain;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
