@@ -6,12 +6,13 @@ import datastructure.HashTable;
 import datastructure.HashTableInterface;
 import datastructure.RBT;
 import datastructure.RBTInterface;
+import java.io.Serializable;
 
 /**
  *
  * @author diegoa.torres
  */
-public class Database {
+public class Database implements Serializable{
 
     private HashTableInterface people;
     private AVLInterface name, lastName, fullName;

@@ -8,12 +8,12 @@ package datastructure;
 /**
  *
  * @author diegoa.torres
+ * @param <K>
+ * @param <E>
  */
-public interface ABBInterface <K,V>{
+public interface ABBInterface <K extends Comparable<K>, E>{
     
-    public boolean  add(V value);
-    public boolean remove(K key);
-    public V search(K key);
-    public boolean isEmpty();
-    public int size();
+    public boolean  insert( K key, E element);
+    public boolean  delete(K key);
+    public E search(K key);
 }

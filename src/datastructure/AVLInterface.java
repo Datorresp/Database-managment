@@ -8,7 +8,14 @@ package datastructure;
 /**
  *
  * @author diegoa.torres
+ * @param <K>
+ * @param <E>
  */
-public interface AVLInterface {
+public interface AVLInterface<K extends Comparable<K>, E> {
     
+    public E maximum();
+    public E minimum();
+    public void rotateRight(K key);
+    public void rotateLeft(K key);
+    public boolean insert(K key, E element);
 }
