@@ -6,7 +6,7 @@ package datastructure;
  */
 public class HashTable <K,V> implements HashTableInterface<K, V> {
 	
-	public final static int ARRAY_SIZE = 1;  
+	public final static int ARRAY_SIZE = 5;  
 	
 	private HashNode<K, V>[] node;
 	
