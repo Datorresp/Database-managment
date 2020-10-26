@@ -86,41 +86,41 @@ public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E> {
     public Node<K,E>  delete(K key, Node<K,E> n) {
        
 
-        if (root == null) {
+        if (n == null) {
             
-            return root;
+            return n;
         }
         
-        if (key.compareTo(root.getKey())<0) {
+        if (key.compareTo(n.getKey())<0) {
             
-            root.left = delete(key, root.left);
-        }else if (key.compareTo(root.getKey())>0) {
+            n.left = delete(key, n.left);
+        }else if (key.compareTo(n.getKey())>0) {
             
-            root.right = delete(key, root.right);
+            n.right = delete(key, n.right);
         }else{
             
-            if (root.left == null) {
+            if (n.left == null) {
                 
-                return root.right;
-            }else if (root.right == null) {
+                return n.right;
+            }else if (n.right == null) {
                 
                 
-                return root.left;
+                return n.left;
             }
             
-            root.setKey(minValue(root));
-            root.right = delete(root.getKey(), root.right);
+            n.setKey(minValue(n));
+            n.right = delete(n.getKey(), n.right);
         }
         
         return root;
     }   
 
-    private K minValue(Node<K,E> root){ 
-        K minv = root.getKey(); 
-        while (root.left != null) 
+    private K minValue(Node<K,E> n){ 
+        K minv = n.getKey(); 
+        while (n.left != null) 
         { 
-            minv = root.left.getKey(); 
-            root = root.left; 
+            minv = n.left.getKey(); 
+            n = n.left; 
         } 
         return minv; 
     } 
@@ -151,9 +151,11 @@ public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E> {
         return tmp;
     }
     
-    public void update(K key, E element){
+    @Override
+    public void update(K key, E element, K newKey){
         
         Node<K, E> n = fullSearch(key);
         n.setType(element);
+        n.setKey(newKey);
     }
 }

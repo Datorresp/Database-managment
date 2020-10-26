@@ -169,9 +169,10 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
         return added;
     }
     
-    public void update(K key, E element){
+    @Override
+    public void update(K key, E element, K newKey){
         
-        super.update(key, element);
+        super.update(key, element, newKey);
     }
     
 //    public int height(Node N)  

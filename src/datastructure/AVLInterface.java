@@ -19,4 +19,5 @@ public interface AVLInterface<K extends Comparable<K>, E> {
     public void rotateLeft(K key);
     public boolean insert(K key, E element);
     public void deleteAVL(K key);
+    public void update(K key, E element, K newKey);
 }

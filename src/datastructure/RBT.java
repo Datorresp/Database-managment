@@ -119,9 +119,9 @@ public class RBT <K extends Comparable<K>, E> extends ABB<K, E> implements RBTIn
     }
 
     @Override
-    public void update(K key, E element){
+    public void update(K key, E element, K newKey){
         
-        super.update(key, element);
+        super.update(key, element, newKey);
     }
 
     @Override

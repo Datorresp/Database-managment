@@ -100,6 +100,9 @@ public class Person implements Comparable<Person>{
     public int compareTo(Person o) {
         return this.id.compareTo(o.getId());
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Person{" + "firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + ", id=" + id + ", photo=" + photo + ", birthday=" + birthday + ", country=" + country + ", gender=" + gender + ", height=" + height + '}';
+    }
 }
