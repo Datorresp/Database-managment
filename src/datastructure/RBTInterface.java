@@ -9,6 +9,11 @@ package datastructure;
  *
  * @author diegoa.torres
  */
-public interface RBTInterface {
+public interface RBTInterface<K extends Comparable<K>, E> {
     
+    public void swpColor(K key1, K key2);
+    public boolean insert(K key, E element);
+    public void update(K key, E element);
+    public void rotateRight(K key);
+    public void rotateLeft(K key);
 }

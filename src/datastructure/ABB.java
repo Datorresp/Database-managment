@@ -76,29 +76,18 @@ public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E> {
         }
         return added;
     }
+    
+    public boolean deleteFromKey(){
+        
+        return false;
+    }
 
     @Override
     public boolean  delete(K key) {
         
         boolean del = false;
-//        Node n = new Node(key, search(key));
-//        
-//        if (isEmpty()) {
-//            
-//            return false;
-//        }else{
-//            
-//            K newKey = (K)n.getKey();
-//            
-//             while (n.left != null){ 
-//                newKey = (K)n.left.getKey();
-//                n = n.left; 
-//            } 
-//            root.setKey(newKey);
-//            
-//            //n.right = delete(root.right, root.getKey()); 
-//        } 
-  
+
+        
         return del;
     }   
 
@@ -127,5 +116,11 @@ public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E> {
             }
         }
         return tmp;
+    }
+    
+    public void update(K key, E element){
+        
+        Node<K, E> n = fullSearch(key);
+        n.setType(element);
     }
 }

@@ -102,24 +102,36 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
         n2.setParent(n1);
         n1.setParent(n2);        
     }
-
-    @Override
-    public boolean insert(K key, E element) {
+    
+    private void balance(K key){
         
-        Node<K, E> n = new Node<>(key, element);
-        boolean added = super.add(n);
-        if (added) {
-            
-            boolean isBalanced = false;
-            Node<K,E> n1 = n.getParent();
+        Node<K, E> n = fullSearch(key);
+        boolean isBalanced = false;
+        
+        Node<K,E> n1 = n.getParent();
             
             while (!isBalanced && n1!= null) {
                 
                 if (n != n1.getLeft()) {
                     
-                    if (isBalanced) {
+                    if(n1.getBalance()==1) {
                         
+                        n1.setBalance(0); 
+                        isBalanced = true;
                     }
+
+                    n1.setBalance(-1); 
+                    
+                    if(n1.getBalance()==-1) { 
+                        
+                        if(n.getBalance()==1) { 
+                            rotateR(n); 
+                        }
+
+                        rotateL(n1);
+                        isBalanced = true; 
+                    }
+
                 }else{
                     
                     if (n1.getBalance()==-1) {
@@ -132,14 +144,41 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
                     
                     if (n1.getBalance()==1) {
                         
+                        if (n.getBalance() == 1) {
+                            
+                            rotateL(n);
+                        }
                         
+                        rotateR(n1);
+                        isBalanced = true;
                     }
                 }
             }
         }
+    
+
+    @Override
+    public boolean insert(K key, E element) {
         
+        Node<K, E> n = new Node<>(key, element);
+        boolean added = super.add(n);
+        if (added) {
+            
+            balance(key);
+        }
         return added;
-        
     }
+    
+    public void update(K key, E element){
+        
+        super.update(key, element);
+    }
+    
+//    public int height(Node N)  
+//    {  
+//        if (N == null)  
+//            return 0;  
+//        return N.height;  
+//    }  
 
 }
