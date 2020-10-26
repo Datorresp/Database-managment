@@ -181,4 +181,11 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
 //        return N.height;  
 //    }  
 
+    @Override
+    public void deleteAVL(K key) {
+        
+        deleteFromKey(key);
+        
+    }
+
 }

@@ -16,4 +16,5 @@ public interface RBTInterface<K extends Comparable<K>, E> {
     public void update(K key, E element);
     public void rotateRight(K key);
     public void rotateLeft(K key);
+    public boolean delete(K key);
 }

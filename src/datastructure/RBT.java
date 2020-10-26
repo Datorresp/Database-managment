@@ -12,7 +12,7 @@ public class RBT <K extends Comparable<K>, E> extends ABB<K, E> implements RBTIn
     public void swpColor(K key1, K key2) {
         
         boolean tmp = ((RBNode)super.fullSearch(key1)).isRed();
-        //((RBNode)super.fullSearch(key1)).setColor(((RBNode)super.fullSearch(key2)));
+        ((RBNode)super.fullSearch(key1)).setColor(((RBNode)fullSearch(key2)).isRed());
         ((RBNode)super.fullSearch(key2)).setColor(tmp);
     }
 
@@ -80,22 +80,60 @@ public class RBT <K extends Comparable<K>, E> extends ABB<K, E> implements RBTIn
     
     private void balance(K key){
         
-        RBNode n = (RBNode)super.fullSearch(key);
+        RBNode<K, E> n = (RBNode)super.fullSearch(key);
+        
+        // Right child is Red but left child is Black or doesn't exist. 
         if (((RBNode)n.getRight()).isRed() && !((RBNode)n.getLeft()).isRed()) {
             
             rotateL(n);
-            swpColor(key, key);
+            swpColor(n.getKey(), n.getLeft().getKey());
+        }
+        
+        //  Both left and right child are Red in color.
+        if (((RBNode)n.getLeft()).isRed() && ((RBNode)n.getRight()).isRed()) {
+            
+            n.setColor(!n.isRed());
+            ((RBNode)n.getLeft()).setColor(false);
+            ((RBNode)n.getRight()).setColor(false);
+        }
+        
+        //Left child as well as left grand child in Red 
+        if (((RBNode)n.getLeft()).isRed() && ((RBNode)n.getLeft().getLeft()).isRed()) {
+            
+            rotateR(n);
+            swpColor(n.getKey(), n.getRight().getKey());
         }
     }
 
     @Override
     public boolean insert(K key, E element){
         
-        return true;
+        RBNode<K, E> n = new RBNode<>(key, element);
+        boolean added = add(n);
+        if (added) {
+            
+            balance(key);
+        }
+        
+        return added;
     }
 
     @Override
     public void update(K key, E element){
         
+        super.update(key, element);
+    }
+
+    @Override
+    public boolean delete(K key) {
+        
+        boolean deleted = delete(key);
+        
+        if (deleted) {
+            
+            
+        }
+        
+        return deleted;
     }
 }

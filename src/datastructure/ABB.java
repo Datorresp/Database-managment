@@ -49,7 +49,7 @@ public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E> {
 
         while(!added){
             
-            if(n.getKey().compareTo(tmp.getKey())>=0) {
+            if(n.getKey().compareTo(tmp.getKey())>0) {
                 
                 if(tmp.getRight() != null){
                     
@@ -77,20 +77,53 @@ public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E> {
         return added;
     }
     
-    public boolean deleteFromKey(){
+    public void deleteFromKey(K key){
         
-        return false;
+        root = delete(key, root);
     }
 
     @Override
-    public boolean  delete(K key) {
-        
-        boolean del = false;
+    public Node<K,E>  delete(K key, Node<K,E> n) {
+       
 
+        if (root == null) {
+            
+            return root;
+        }
         
-        return del;
+        if (key.compareTo(root.getKey())<0) {
+            
+            root.left = delete(key, root.left);
+        }else if (key.compareTo(root.getKey())>0) {
+            
+            root.right = delete(key, root.right);
+        }else{
+            
+            if (root.left == null) {
+                
+                return root.right;
+            }else if (root.right == null) {
+                
+                
+                return root.left;
+            }
+            
+            root.setKey(minValue(root));
+            root.right = delete(root.getKey(), root.right);
+        }
+        
+        return root;
     }   
 
+    private K minValue(Node<K,E> root){ 
+        K minv = root.getKey(); 
+        while (root.left != null) 
+        { 
+            minv = root.left.getKey(); 
+            root = root.left; 
+        } 
+        return minv; 
+    } 
     @Override
     public E search(K key) {
         

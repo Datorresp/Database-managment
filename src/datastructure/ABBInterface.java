@@ -14,6 +14,6 @@ package datastructure;
 public interface ABBInterface <K extends Comparable<K>, E>{
     
     public boolean  insert( K key, E element);
-    public boolean  delete(K key);
+    public Node<K,E>  delete(K key, Node<K,E>n);
     public E search(K key);
 }
