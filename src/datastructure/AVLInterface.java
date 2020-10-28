@@ -12,12 +12,9 @@ package datastructure;
  * @param <E>
  */
 public interface AVLInterface<K extends Comparable<K>, E> {
-    
-    public E maximum();
-    public E minimum();
-    public void rotateRight(K key);
-    public void rotateLeft(K key);
+
     public boolean insert(K key, E element);
-    public void deleteAVL(K key);
+    public Node<K,E> deleteAVL(Node<K,E> n, K key);
     public void update(K key, E element, K newKey);
+    public E search(K key);
 }

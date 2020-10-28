@@ -9,7 +9,6 @@ package datastructure;
  */
 public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLInterface<K, E>{
 
-    @Override
     public E maximum() {
  
         Node tmp = super.getRoot();
@@ -25,7 +24,6 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
         return (E) tmp.getType();
     }
 
-    @Override
     public E minimum() {
         
         Node tmp = super.getRoot();
@@ -40,8 +38,17 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
         
         return (E) tmp.getType();       
     }
+    
+    int max(int a, int b){  
+        return (a > b) ? a : b;  
+    }  
+    
+    int height(Node<K,E> n){  
+        if (n == null)  
+            return 0;  
+        return n.getBalance();  
+    } 
 
-    @Override
     public void rotateRight(K key) {
         
         Node<K, E> n = super.fullSearch(key);
@@ -72,7 +79,6 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
         n1.setParent(n2);
     }
 
-    @Override
     public void rotateLeft(K key) {
         
         Node<K, E> n = fullSearch(key);
@@ -175,18 +181,126 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
         super.update(key, element, newKey);
     }
     
-//    public int height(Node N)  
-//    {  
-//        if (N == null)  
-//            return 0;  
-//        return N.height;  
-//    }  
+    int getBalance(Node<K,E> N){  
+        if (N == null)  
+            return 0;  
+        return height(N.left) - height(N.right);  
+    } 
 
     @Override
-    public void deleteAVL(K key) {
+    public Node<K,E> deleteAVL(Node<K,E> root, K key) {
         
-        deleteFromKey(key);
+      if (root == null)  
+            return root;  
+        if (key.compareTo(root.getKey())<0){ 
+            root.left = deleteAVL(root.left, key); 
+        } else if (key.compareTo(root.getKey())>0){  
+            root.right = deleteAVL(root.right, key);  
+        }else{  
+ 
+            if ((root.left == null) || (root.right == null)){  
+                
+                Node<K,E> temp = null;
+                
+                if (temp == root.left) { 
+                    temp = root.right;  
+                }else{
+                    temp = root.left;  
+                }
+                 
+                if (temp == null) {  
+                    
+                    temp = root;  
+                    root = null;  
+                }  
+                else{ 
+                    root = temp;
+                }
+            }else{  
+
+                Node<K,E> temp = minValueAVL(root.right);  
+  
+                root.setKey(temp.getKey());
+    
+                root.right = deleteAVL(root.right, temp.getKey());  
+            }  
+        }  
+
+        if (root == null)  
+            return root;  
+    
+        root.setBalance(max(height(root.left), height(root.right)) + 1);  
+  
+        int balance = getBalance(root);  
+  
+
+        if (balance > 1 && getBalance(root.left) >= 0)  
+            return rightRotate(root);  
+  
+        // Left Right Case  
+        if (balance > 1 && getBalance(root.left) < 0)  
+        {  
+            root.left = leftRotate(root.left);  
+            return rightRotate(root);  
+        }  
+  
+        // Right Right Case  
+        if (balance < -1 && getBalance(root.right) <= 0)  
+            return leftRotate(root);  
+  
+        // Right Left Case  
+        if (balance < -1 && getBalance(root.right) > 0)  
+        {  
+            root.right = rightRotate(root.right);  
+            return leftRotate(root);  
+        }  
+  
+        return root;    
         
     }
+    
+    private  Node rightRotate(Node y){  
+        Node x = y.left;  
+        Node T2 = x.right;  
+   
+        x.right = y;  
+        y.left = T2;  
+  
+        // Update heights  
+        y.setBalance(max(height(y.left), height(y.right)) + 1); 
+        x.setBalance(max(height(x.left), height(x.right)) + 1);  
+ 
+        return x;  
+    }  
+  
 
+    public Node leftRotate(Node x){  
+        Node y = x.right;  
+        Node T2 = y.left;  
+   
+        y.left = x;  
+        x.right = T2;  
+  
+        // Update heights  
+        x.setBalance(max(height(x.left), height(x.right)) + 1);  
+        y.setBalance(max(height(y.left), height(y.right)) + 1);  
+ 
+        return y;  
+    }
+    
+    public Node<K,E> minValueAVL(Node<K,E> node){  
+           
+        Node current = node;  
+ 
+        while (current.left != null)  
+            current = current.left;  
+  
+        return current;  
+    }  
+
+    @Override
+    public E search(K key){
+        
+        return super.search(key);
+    }
 }

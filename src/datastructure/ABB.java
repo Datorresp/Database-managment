@@ -86,36 +86,39 @@ public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E> {
     public Node<K,E>  delete(K key, Node<K,E> n) {
        
 
-        if (n == null) {
+        if (root == null) {
             
-            return n;
+            return root;
         }
         
-        if (key.compareTo(n.getKey())<0) {
+        if (key.compareTo(root.getKey())<0) {
             
-            n.left = delete(key, n.left);
-        }else if (key.compareTo(n.getKey())>0) {
+            root.left = delete(key, root.left);
+        }else if (key.compareTo(root.getKey())>0) {
             
-            n.right = delete(key, n.right);
+            root.right = delete(key, root.right);
         }else{
             
-            if (n.left == null) {
+            if (root.left == null && n.right == null) {
+                
+            }else if (root.left == null) {
                 
                 return n.right;
             }else if (n.right == null) {
                 
                 
                 return n.left;
-            }
+            }else{
             
-            n.setKey(minValue(n));
-            n.right = delete(n.getKey(), n.right);
+                n.setKey(minValue(n));
+                n.right = delete(n.getKey(), n.right);
+            }
         }
         
         return root;
     }   
 
-    private K minValue(Node<K,E> n){ 
+    public  K minValue(Node<K,E> n){ 
         K minv = n.getKey(); 
         while (n.left != null) 
         { 
