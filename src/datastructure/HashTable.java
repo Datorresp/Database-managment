@@ -1,10 +1,12 @@
 package datastructure;
 
+import java.io.Serializable;
+
 /**
  *
  * @author diegoa.torres
  */
-public class HashTable <K,V> implements HashTableInterface<K, V> {
+public class HashTable <K,V> implements HashTableInterface<K, V>, Serializable {
 	
 	public final static int ARRAY_SIZE = 5;  
 	
@@ -105,4 +107,9 @@ public class HashTable <K,V> implements HashTableInterface<K, V> {
 			aux = aux.getNextHashNode();
 		}
 	}
+        
+        public void update(K key){
+            
+            V n = search(key);
+        }
 }

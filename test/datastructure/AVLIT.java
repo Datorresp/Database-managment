@@ -51,12 +51,10 @@ public class AVLIT<K,V> {
     @Test
     public void testInsert() {
         System.out.println("insert");
-        String key = "Diego";
+        String key = "10";
         Person element = new Person("Diego", "Torres", "1193254110", "ABC", "", "", 1, 0);
         instance.insert(key, element);
         assertEquals(instance.getRoot().getLeft().getType().getCountry(), element.getFirstName());
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**

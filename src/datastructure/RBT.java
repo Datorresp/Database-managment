@@ -1,12 +1,14 @@
 package datastructure;
 
+import java.io.Serializable;
+
 /**
  *
  * @author diegoa.torres
  * @param <K>
  * @param <E>
  */
-public class RBT <K extends Comparable<K>, E> extends ABB<K, E> implements RBTInterface<K, E>{
+public class RBT <K extends Comparable<K>, E> extends ABB<K, E> implements RBTInterface<K, E>, Serializable{
 
     @Override
     public void swpColor(K key1, K key2) {
@@ -81,15 +83,13 @@ public class RBT <K extends Comparable<K>, E> extends ABB<K, E> implements RBTIn
     private void balance(K key){
         
         RBNode<K, E> n = (RBNode)super.fullSearch(key);
-        
-        // Right child is Red but left child is Black or doesn't exist. 
+
         if (((RBNode)n.getRight()).isRed() && !((RBNode)n.getLeft()).isRed()) {
             
             rotateL(n);
             swpColor(n.getKey(), n.getLeft().getKey());
         }
-        
-        //  Both left and right child are Red in color.
+
         if (((RBNode)n.getLeft()).isRed() && ((RBNode)n.getRight()).isRed()) {
             
             n.setColor(!n.isRed());
@@ -97,7 +97,6 @@ public class RBT <K extends Comparable<K>, E> extends ABB<K, E> implements RBTIn
             ((RBNode)n.getRight()).setColor(false);
         }
         
-        //Left child as well as left grand child in Red 
         if (((RBNode)n.getLeft()).isRed() && ((RBNode)n.getLeft().getLeft()).isRed()) {
             
             rotateR(n);

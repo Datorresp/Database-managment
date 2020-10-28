@@ -103,8 +103,37 @@ public class Database implements Serializable{
         id.insert(p.getId(), p);
     }
     
-    public void update(){
+    public void update(String key, Person p){
         
+        name.update(key, p, p.getFirstName());
+        lastName.update(key, p, p.getLastName());
+        fullName.update(key, p, p.getFullName());
+        id.update(key, p, p.getId());
+    }
+    
+    public String globalSearch(String id){
+        
+        return people.search(id).toString();
+    }
+    
+    public String searchByFirstName(String fname){
+        
+        return name.search(fname).toString();
+    }
+    
+    public String searchByLastName(String lname){
+        
+        return lastName.search(lname).toString();
+    }
+    
+    public String searchByFullName(String fname){
+        
+        return fullName.search(fname).toString();
+    }
+    
+    public String searchById(String idn){
+        
+        return "";
     }
     
     

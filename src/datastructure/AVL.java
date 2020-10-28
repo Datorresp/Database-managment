@@ -1,5 +1,7 @@
 package datastructure;
 
+import java.io.Serializable;
+
 /**
  *
  * @author diegoa.torres
@@ -7,11 +9,11 @@ package datastructure;
  * @param <E>
  * 
  */
-public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLInterface<K, E>{
+public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLInterface<K, E>, Serializable{
 
     public E maximum() {
  
-        Node tmp = super.getRoot();
+        Node<K, E> tmp = super.getRoot();
         if (tmp == null) {
             
             return null;
@@ -26,7 +28,7 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
 
     public E minimum() {
         
-        Node tmp = super.getRoot();
+        Node<K, E> tmp = super.getRoot();
         if (tmp == null) {
             
             return null;
@@ -259,9 +261,9 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
         
     }
     
-    private  Node rightRotate(Node y){  
-        Node x = y.left;  
-        Node T2 = x.right;  
+    private  Node<K, E> rightRotate(Node<K,E> y){  
+        Node<K,E> x = y.left;  
+        Node<K,E> T2 = x.right;  
    
         x.right = y;  
         y.left = T2;  
@@ -274,9 +276,9 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
     }  
   
 
-    public Node leftRotate(Node x){  
-        Node y = x.right;  
-        Node T2 = y.left;  
+    public Node<K, E> leftRotate(Node<K,E> x){  
+        Node<K,E> y = x.right;  
+        Node<K,E> T2 = y.left;  
    
         y.left = x;  
         x.right = T2;  
@@ -290,7 +292,7 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
     
     public Node<K,E> minValueAVL(Node<K,E> node){  
            
-        Node current = node;  
+        Node<K,E> current = node;  
  
         while (current.left != null)  
             current = current.left;  

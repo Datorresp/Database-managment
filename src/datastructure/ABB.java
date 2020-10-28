@@ -1,12 +1,14 @@
 package datastructure;
 
+import java.io.Serializable;
+
 /**
  *
  * @author diegoa.torres
  * @param <K>
  * @param <E>
  */
-public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E> {
+public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E>, Serializable {
 
     private Node<K, E> root;
 
