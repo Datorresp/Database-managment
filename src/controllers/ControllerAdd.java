@@ -65,21 +65,21 @@ public class ControllerAdd implements Initializable {
             String b = birthday.getValue().toString();
             String c = country.getText();
 
-            //noinspection ConstantConditions
-            if (fn.equals("") || ln.equals("") || ids .equals("") || phot.equals("") || b .equals("") || c .equals("")) {
+            if (fn.equals("") || ln.equals("") || ids .equals("") || b .equals("") || c .equals("")) {
                 throw new SomethingMissingException();
             }
 
-            int g = -1;
+            int g;
             if (gender.getValue().equals("Male"))
                 g = Person.MALE;
             else
                 g= Person.FEMALE;
             double h = Double.parseDouble(height.getText());
 
-            //add to the data base
+            Person newp = new Person(fn, ln, ids, phot, b, c, g, h);
+            db.addPerson(newp);
 
-        } catch (NumberFormatException | NullPointerException | SomethingMissingException e) {
+         } catch (NumberFormatException | NullPointerException | SomethingMissingException e) {
             alert1();
         }
 

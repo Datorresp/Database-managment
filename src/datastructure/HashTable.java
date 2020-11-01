@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class HashTable <K,V> implements HashTableInterface<K, V>, Serializable {
 	
-	public final static int ARRAY_SIZE = 5;  
+	public final static int ARRAY_SIZE = 1;
 	
 	private HashNode<K, V>[] node;
 	

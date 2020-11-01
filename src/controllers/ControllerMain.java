@@ -24,9 +24,10 @@ public class ControllerMain implements Initializable {
     private BorderPane bp;
 
     @FXML
-    private Database db;
+    private final Database db;
 
     public ControllerMain() {
+        db = new Database();
         controllerAdd = new ControllerAdd(this);
         controllerRemove = new ControllerRemove(this);
         controllerSearch = new ControllerSearch(this);
@@ -83,7 +84,4 @@ public class ControllerMain implements Initializable {
         return db;
     }
 
-    public void setDb(Database db) {
-        this.db = db;
-    }
 }

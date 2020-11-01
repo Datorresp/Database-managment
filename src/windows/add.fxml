@@ -55,12 +55,12 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="height" layoutX="148.0" layoutY="336.0" />
       <Label layoutX="224.0" layoutY="51.0" text="ADD PERSON">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <ComboBox fx:id="gender" layoutX="413.0" layoutY="287.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="height" layoutX="148.0" layoutY="336.0" />
    </children>
 </Pane>
