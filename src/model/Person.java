@@ -6,6 +6,7 @@ import java.io.Serializable;
  *
  * @author diegoa.torres
  */
+
 public class Person implements Comparable<Person>, Serializable{
 
     public static final int MALE = 1;
