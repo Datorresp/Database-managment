@@ -79,62 +79,74 @@ public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E>, Ser
         return added;
     }
     
-    public void deleteFromKey(K key){
-        
-        root = delete(key, root);
+    public Node<K,E> deleteFromKey(K key){
+    	Node<K,E> deleteK = fullSearch(key);
+    	return delete(deleteK);
     }
 
     @Override
-    public Node<K,E>  delete(K key, Node<K,E> n) {
-       
-
-        if (root == null) {
-            
-            return root;
-        }
-        
-        if (key.compareTo(root.getKey())<0) {
-            
-            root.left = delete(key, root.left);
-        }else if (key.compareTo(root.getKey())>0) {
-            
-            root.right = delete(key, root.right);
-        }else{
-            
-            if (root.left == null && n.right == null) {
-                
-            }else if (root.left == null) {
-                
-                return n.right;
-            }else if (n.right == null) {
-                
-                
-                return n.left;
-            }else{
-            
-                n.setKey(minValue(n));
-                n.right = delete(n.getKey(), n.right);
-            }
-        }
-        
-        return root;
+    public Node<K,E>  delete(Node<K,E> n) {
+       Node<K,E> deleteKey = null;
+       Node<K,E> current = null;
+       if (n != null) {
+		if (n.getLeft() == null || n.getRight() == null) {
+			deleteKey = n;
+		}else {
+			deleteKey = next(n);
+		}
+		if (deleteKey.getLeft() != null) {
+			current = deleteKey.getLeft();
+		}else {
+			current = deleteKey.getRight();
+		}
+		if (current != null) {
+			current.setParent(deleteKey.getParent());
+		}
+		if (deleteKey.getParent() == null) {
+			root = current;
+		}else {
+			if(deleteKey == deleteKey.getParent().getLeft()) {
+				deleteKey.getParent().setLeft(current);
+			}else {
+				deleteKey.getParent().setRight(current);
+			}
+		}
+		if (deleteKey != n) {
+			n.setKey(deleteKey.getKey());
+		}
+       }
+       return deleteKey;
     }   
+    
+    public Node<K,E> next(Node<K,E> n){
+    	Node<K,E> actual;
+    	if (n.getRight()!= null) {
+			actual = minValue(n.getRight());
+		}else {
+			actual = n.getParent();
+			while (actual != null && n == actual.getRight()) {
+				n = actual;
+				actual = actual.getParent();
+			}
+		}
+    	return actual;
+    }
 
-    public  K minValue(Node<K,E> n){ 
-        K minv = n.getKey(); 
+
+    public  Node<K,E> minValue(Node<K,E> n){ 
+        Node<K,E> minv = null; 
         while (n.left != null) 
         { 
-            minv = n.left.getKey(); 
-            n = n.left; 
+            minv = n.getLeft();  
         } 
         return minv; 
     } 
     @Override
-    public E search(K key) {
+    public Node<K,E> search(K key) {
         
         Node<K, E> n = fullSearch(key);
         if (n!= null){
-            return n.getType();
+            return n;
         }else{
             return null;  
         }

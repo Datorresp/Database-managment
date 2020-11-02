@@ -41,11 +41,11 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
         return (E) tmp.getType();       
     }
     
-    public int max(int a, int b){  
+    int max(int a, int b){  
         return (a > b) ? a : b;  
     }  
     
-    public int height(Node<K,E> n){  
+    int height(Node<K,E> n){  
         if (n == null)  
             return 0;  
         return n.getBalance();  
@@ -190,11 +190,75 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
     } 
 
     @Override
-    public void deleteAVL(Node<K,E> root, K key) {
-    	Node<K,E> d = super.search(key);
-    	super.delete(d);
-    	//establecer el factor balanceo
-    	//rebalancear
+    public Node<K,E> deleteAVL(Node<K,E> root, K key) {
+        
+      if (root == null)  
+            return root;  
+        if (key.compareTo(root.getKey())<0){ 
+            root.left = deleteAVL(root.left, key); 
+        } else if (key.compareTo(root.getKey())>0){  
+            root.right = deleteAVL(root.right, key);  
+        }else{  
+ 
+            if ((root.left == null) || (root.right == null)){  
+                
+                Node<K,E> temp = null;
+                
+                if (temp == root.left) { 
+                    temp = root.right;  
+                }else{
+                    temp = root.left;  
+                }
+                 
+                if (temp == null) {  
+                    
+                    temp = root;  
+                    root = null;  
+                }  
+                else{ 
+                    root = temp;
+                }
+            }else{  
+
+                Node<K,E> temp = minValueAVL(root.right);  
+  
+                root.setKey(temp.getKey());
+    
+                root.right = deleteAVL(root.right, temp.getKey());  
+            }  
+        }  
+
+        if (root == null)  
+            return root;  
+    
+        root.setBalance(max(height(root.left), height(root.right)) + 1);  
+  
+        int balance = getBalance(root);  
+  
+
+        if (balance > 1 && getBalance(root.left) >= 0)  
+            return rightRotate(root);  
+  
+        // Left Right Case  
+        if (balance > 1 && getBalance(root.left) < 0)  
+        {  
+            root.left = leftRotate(root.left);  
+            return rightRotate(root);  
+        }  
+  
+        // Right Right Case  
+        if (balance < -1 && getBalance(root.right) <= 0)  
+            return leftRotate(root);  
+  
+        // Right Left Case  
+        if (balance < -1 && getBalance(root.right) > 0)  
+        {  
+            root.right = rightRotate(root.right);  
+            return leftRotate(root);  
+        }  
+  
+        return root;    
+        
     }
     
     private  Node<K, E> rightRotate(Node<K,E> y){  
@@ -237,7 +301,7 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
     }  
 
     @Override
-    public Node<K,E> search(K key){
+    public E search(K key){
         
         return super.search(key);
     }
