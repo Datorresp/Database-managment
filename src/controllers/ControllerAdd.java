@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import model.Database;
 import model.Person;
 
@@ -58,6 +60,7 @@ public class ControllerAdd implements Initializable {
     void addPerson(ActionEvent event) {
         try {
             Database db = cm.getDb();
+            BorderPane bp = cm.getBp();
             String fn = firstName.getText();
             String ln = lastName.getText();
             String ids = id.getText();
@@ -81,11 +84,22 @@ public class ControllerAdd implements Initializable {
 
             Database.serializacion(db);
 
+            bp.setCenter(new Pane());
+
+            alert2();
+
          } catch (NumberFormatException | NullPointerException | SomethingMissingException e) {
             alert1();
         }
 
 
+    }
+
+    private void alert2() {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("IT WAS SATISFACTORY CREATED");
+        a.setContentText("THE OBJECT WAS SATISFACTORY CREATED");
+        a.showAndWait();
     }
 
     private void alert1() {

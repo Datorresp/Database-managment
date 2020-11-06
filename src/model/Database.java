@@ -108,6 +108,42 @@ public class Database implements Serializable{
         fullName.update(key, p, p.getFullName());
         id.update(key, p, p.getId());
     }
+    //in construction
+
+    public void updateName(String key, Person pUpdate) {
+        Person p = (Person) name.search(key);
+        name.update(key, pUpdate, pUpdate.getFirstName());
+        lastName.update(p.getLastName(), pUpdate, pUpdate.getLastName());
+        fullName.update(p.getFullName(), pUpdate, pUpdate.getFullName());
+        id.update(p.getId(), pUpdate, pUpdate.getFullName());
+    }
+
+    public void updateLastName(String key, Person pUpdate) {
+        Person p = (Person) lastName.search(key);
+        name.update(p.getFirstName(), p, pUpdate.getFirstName());
+        lastName.update(key, p, pUpdate.getLastName());
+        fullName.update(p.getFullName(), p, pUpdate.getFullName());
+        id.update(p.getId(), p, pUpdate.getId());
+    }
+
+    public void updateFullName(String key, Person pUpdate) {
+        Person p = (Person) fullName.search(key);
+        name.update(p.getFirstName(), p, pUpdate.getFirstName());
+        lastName.update(p.getLastName(), p, pUpdate.getLastName());
+        fullName.update(key, p, pUpdate.getFullName());
+        id.update(p.getId(), p, pUpdate.getId());
+    }
+
+    public void updateId(String key, Person pUpdate) {
+        Person p = (Person) fullName.search(key);
+        name.update(p.getFirstName(), p, pUpdate.getFirstName());
+        lastName.update(p.getLastName(), p, pUpdate.getLastName());
+        fullName.update(p.getFullName(), p, pUpdate.getFullName());
+        id.update(key, p, pUpdate.getId());
+    }
+
+    //
+
     
     public String globalSearch(String id){
         

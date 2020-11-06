@@ -108,4 +108,8 @@ public class ControllerMain implements Initializable {
         return db;
     }
 
+    public BorderPane getBp() {
+        return bp;
+    }
+
 }
