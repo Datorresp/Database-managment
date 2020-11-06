@@ -8,7 +8,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import model.Database;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,12 +30,33 @@ public class ControllerMain implements Initializable {
     private final Database db;
 
     public ControllerMain() {
-        db = new Database();
+        db = loadDB();
         controllerAdd = new ControllerAdd(this);
         controllerRemove = new ControllerRemove(this);
         controllerSearch = new ControllerSearch(this);
         controllerUpdate = new ControllerUpdate(this);
         controllerGenerate = new ControllerGenerate(this);
+    }
+
+    private Database loadDB() {
+        Database ret = new Database();
+        try {
+
+            File f = new File(Database.PATH);
+            if(f.exists()) {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+
+                ret = ((Database) ois.readObject());
+
+                ois.close();
+            }
+
+
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ret;
     }
 
     @Override

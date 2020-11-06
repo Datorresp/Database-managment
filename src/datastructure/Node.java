@@ -1,12 +1,14 @@
 package datastructure;
 
+import java.io.Serializable;
+
 /**
  *
  * @author diegoa.torres
  * @param <E>
  * @param <K>
  */
-public class Node<K extends Comparable<K>, E> {
+public class Node<K extends Comparable<K>, E> implements Serializable {
     
     private E type;
     private K key;
@@ -79,5 +81,10 @@ public class Node<K extends Comparable<K>, E> {
 
     public void setRight(Node<K, E> right) {
         this.right = right;
+    }
+
+    @Override
+    public String toString() {
+        return type +"";
     }
 }

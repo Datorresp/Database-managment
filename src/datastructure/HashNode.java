@@ -1,11 +1,13 @@
 package datastructure;
 
+import java.io.Serializable;
+
 /**
  *
  * @author diegoa.torres
  * @param <K>
  */
-public class HashNode <K,E> {
+public class HashNode <K,E> implements Serializable {
 	private K key;
 	private E value;
 	

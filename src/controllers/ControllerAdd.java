@@ -79,6 +79,8 @@ public class ControllerAdd implements Initializable {
             Person newp = new Person(fn, ln, ids, phot, b, c, g, h);
             db.addPerson(newp);
 
+            Database.serializacion(db);
+
          } catch (NumberFormatException | NullPointerException | SomethingMissingException e) {
             alert1();
         }

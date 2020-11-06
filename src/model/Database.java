@@ -22,6 +22,8 @@ import java.io.Serializable;
  */
 public class Database implements Serializable{
 
+    public static final String PATH = "Final.txt";
+
     private HashTableInterface people;
     private AVLInterface name, lastName, fullName;
     private RBTInterface id;
@@ -69,11 +71,11 @@ public class Database implements Serializable{
         return p;
     }
     
-    public void serializacion (Object o){
+    public static void serializacion (Object o){
 
         try{
 
-            String rutaFichero = "Final.txt";
+            String rutaFichero = PATH;
 
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaFichero));
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(rutaFichero));
@@ -81,17 +83,13 @@ public class Database implements Serializable{
             oos.writeObject(o);
             oos.close();
 
-            Person readPerson = (Person) ois.readObject();
+//            Person readPerson = (Person) ois.readObject();
             ois.close();
-
 
         }catch (IOException ex) {
 
-            System.out.println(ex.getMessage());
-        }catch (ClassNotFoundException ex) {
-
-            System.out.println(ex.getMessage());
-        }             
+            ex.printStackTrace();
+        }
     }
     
     public void addPerson(Person p){
