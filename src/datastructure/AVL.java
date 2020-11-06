@@ -191,8 +191,8 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
 
     @Override
     public void deleteAVL(Node<K,E> root, K key) {
-    	Node<K,E> d = super.search(key);
-    	super.delete(d);
+//    	Node<K,E> d = super.search(key);
+//    	super.delete(d);
     	//establecer el factor balanceo
     	//rebalancear
     }
@@ -237,7 +237,7 @@ public class AVL <K extends Comparable<K>, E> extends ABB<K, E> implements AVLIn
     }  
 
     @Override
-    public Node<K,E> search(K key){
+    public E search(K key){
         
         return super.search(key);
     }

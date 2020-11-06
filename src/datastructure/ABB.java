@@ -141,12 +141,13 @@ public class ABB <K extends Comparable<K>, E> implements ABBInterface<K, E>, Ser
         } 
         return minv; 
     } 
+    
     @Override
-    public Node<K,E> search(K key) {
+    public E search(K key) {
         
         Node<K, E> n = fullSearch(key);
         if (n!= null){
-            return n;
+            return n.getType();
         }else{
             return null;  
         }

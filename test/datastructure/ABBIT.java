@@ -243,9 +243,9 @@ public class ABBIT<K,E> implements Serializable {
         System.out.println("search");
         setUp1();
         String key = "Isabella";
-//        Person result = instance.search(key);
-//        assertEquals(key, result.getFirstName());
-//        assertEquals(instance.getRoot().getType().getFirstName(), result.getFirstName());
+        Person result = instance.search(key);
+        assertEquals(key, result.getFirstName());
+        assertEquals(instance.getRoot().getType().getFirstName(), result.getFirstName());
     }
 
     /**
@@ -261,9 +261,9 @@ public class ABBIT<K,E> implements Serializable {
         System.out.println("search");
         setUp1();
         String key = "Diego";
-//        Person result = instance.search(key);
-//        assertEquals(key, result.getFirstName());
-//        assertEquals(instance.getRoot().left.getType().getFirstName(), result.getFirstName());
+        Person result = instance.search(key);
+        assertEquals(key, result.getFirstName());
+        assertEquals(instance.getRoot().left.getType().getFirstName(), result.getFirstName());
     }
     
      /**
@@ -278,9 +278,9 @@ public class ABBIT<K,E> implements Serializable {
         System.out.println("search");
         setUp1();
         String key = "Juan Camilo";
-//        Person result = instance.search(key);
-//        assertEquals(key, result.getFirstName());
-//        assertEquals(instance.getRoot().right.getType().getFirstName(), result.getFirstName());
+        Person result = instance.search(key);
+        assertEquals(key, result.getFirstName());
+        assertEquals(instance.getRoot().right.getType().getFirstName(), result.getFirstName());
     }
     
     /**
@@ -295,9 +295,9 @@ public class ABBIT<K,E> implements Serializable {
         System.out.println("search");
         setUp1();
         String key = "Manuela";
-//        Person result = instance.search(key);
-//        assertEquals(key, result.getFirstName());
-//        assertEquals(instance.getRoot().right.right.getType().getFirstName(), result.getFirstName());
+        Person result = instance.search(key);
+        assertEquals(key, result.getFirstName());
+        assertEquals(instance.getRoot().right.right.getType().getFirstName(), result.getFirstName());
     }
     
     
@@ -313,9 +313,9 @@ public class ABBIT<K,E> implements Serializable {
         System.out.println("search");
         setUp1();
         String key = "Jorge";
-//        Person result = instance.search(key);
-//        assertEquals(key, result.getFirstName());
-//        assertEquals(instance.getRoot().right.left.getType().getFirstName(), result.getFirstName());
+        Person result = instance.search(key);
+        assertEquals(key, result.getFirstName());
+        assertEquals(instance.getRoot().right.left.getType().getFirstName(), result.getFirstName());
     }
 
     /**
@@ -330,9 +330,9 @@ public class ABBIT<K,E> implements Serializable {
         System.out.println("search");
         setUp1();
         String key = "Ellen";
-//        Person result = instance.search(key);
-//        assertEquals(key, result.getFirstName());
-//        assertEquals(instance.getRoot().left.right.getType().getFirstName(), result.getFirstName());
+        Person result = instance.search(key);
+        assertEquals(key, result.getFirstName());
+        assertEquals(instance.getRoot().left.right.getType().getFirstName(), result.getFirstName());
     }
     
     /**
@@ -347,9 +347,9 @@ public class ABBIT<K,E> implements Serializable {
         System.out.println("search");
         setUp1();
         String key = "Ana";
-//        Person result = instance.search(key);
-//        assertEquals(key, result.getFirstName());
-//        assertEquals(instance.getRoot().left.left.getType().getFirstName(), result.getFirstName());
+        Person result = instance.search(key);
+        assertEquals(key, result.getFirstName());
+        assertEquals(instance.getRoot().left.left.getType().getFirstName(), result.getFirstName());
     }
     
     /**
@@ -361,7 +361,7 @@ public class ABBIT<K,E> implements Serializable {
         String key = "Diego";
         Person p = new Person("DIEGO A", "TORRES", "111", "ABC", "1/1/2001", "EEUU", 1, 1.52);
         instance.update(key, p, p.getFirstName());
-        //assertEquals(p.toString(), instance.getRoot().left.toString());
+        assertEquals(p.toString(), instance.getRoot().left.toString());
         assertEquals("DIEGO A", instance.getRoot().left.getKey());
     }
     

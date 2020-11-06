@@ -8,9 +8,12 @@ package datastructure;
 /**
  *
  * @author diegoa.torres
+ * @param <K>
+ * @param <E>
  */
 public interface RBTInterface<K extends Comparable<K>, E> {
     
+ 
     public void swpColor(K key1, K key2);
     public boolean insert(K key, E element);
     public void update(K key, E element, K newKey);

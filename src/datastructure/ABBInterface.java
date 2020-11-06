@@ -15,6 +15,6 @@ public interface ABBInterface <K extends Comparable<K>, E>{
     
     public boolean  insert( K key, E element);
     public Node<K,E>  delete(Node<K,E>n);
-    public Node<K,E> search(K key);
+    public E search(K key);
     public void update(K key, E element, K newKey);
 }

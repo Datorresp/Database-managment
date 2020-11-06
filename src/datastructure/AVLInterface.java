@@ -16,5 +16,5 @@ public interface AVLInterface<K extends Comparable<K>, E>{
     public boolean insert(K key, E element);
     public void deleteAVL(Node<K,E> n, K key);
     public void update(K key, E element, K newKey);
-    public Node<K,E> search(K key);
+    public E search(K key);
 }
