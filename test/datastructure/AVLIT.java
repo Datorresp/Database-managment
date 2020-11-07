@@ -44,6 +44,25 @@ public class AVLIT<K,V> implements Serializable {
         Person p1 = new Person("Juan", "Guerra", " ", "", "", "", 0, 0);
          instance.insert(p1.getFirstName(), p1);
     }
+
+    @BeforeEach
+    public void setUp2() {
+        Person p = new Person("Laura", "Calderon", "111111111", "ABC", "14/2/2001", "Colombia", 2, 1.50);
+        Person p1 = new Person("Juan Camilo", "Guerra" , "100603596", "ABC", "10/4/2002", "Colombia", 1, 1.70);
+        Person p2 = new Person("Diego", "Torres", "1193254110", "ABC", "14/12/2001", "Colombia", 1, 1.89);
+        Person p3 = new Person("Maria", "Angelica" , "1024578412", "ABC", "1/1/2001", "Colombia", 2, 1.73);
+        Person p4 = new Person("Carlos", "Perez" , "1002587456", "ABC", "18/1/2003", "Colombia", 1, 1.73);
+        Person p5 = new Person("Ana", "Gonzales" , "123582147", "ABC", "11/10/2000", "Colombia", 2, 1.73);
+        Person p6 = new Person("Gloria", "Elena" , "1003256145", "ABC", "1/5/2000", "Colombia", 1, 1.73);
+
+        instance.insert(p.getFirstName(), p);
+        instance.insert(p1.getFirstName(), p1);
+        instance.insert(p2.getFirstName(), p2);
+        instance.insert(p3.getFirstName(), p3);
+        instance.insert(p4.getFirstName(), p4);
+        instance.insert(p5.getFirstName(), p5);
+        instance.insert(p6.getFirstName(), p6);
+    }
     
     @AfterEach
     public void tearDown() {
@@ -62,32 +81,89 @@ public class AVLIT<K,V> implements Serializable {
         assertEquals(instance.getRoot().getLeft().getType().getCountry(), element.getFirstName());
     }
 
+    @Test
+    public void testInsert1() {
+        System.out.println("insert1");
+        setUp2();
+        String key = "Laura";
+        assertEquals(key, instance.search(key));
+    }
+
+    @Test
+    public void testInsert2() {
+        System.out.println("insert2");
+        setUp2();
+        String key = "Juan Camilo";
+        assertEquals(key, instance.search(key));
+    }
+
+    @Test
+    public void testInsert3() {
+        System.out.println("insert3");
+        setUp2();
+        String key = "Diego";
+        assertEquals(key, instance.search(key));
+    }
+
+    @Test
+    public void testInsert4() {
+        System.out.println("insert4");
+        setUp2();
+        String key = "Maria";
+        assertEquals(key, instance.search(key));
+    }
+
+    @Test
+    public void testInsert5() {
+        System.out.println("insert5");
+        setUp2();
+        String key = "Carlos";
+        assertEquals(key, instance.search(key));
+    }
+
+    @Test
+    public void testInsert6() {
+        System.out.println("insert6");
+        setUp2();
+        String key = "Ana";
+        assertEquals(key, instance.search(key));
+    }
+
+    @Test
+    public void testInsert7() {
+        System.out.println("insert7");
+        setUp2();
+        String key = "Gloria";
+        assertEquals(key, instance.search(key));
+    }
+
     /**
      * Test of update method, of class AVL.
      */
     @Test
     public void testUpdate() {
         System.out.println("update");
-        Object key = null;
-        Object element = null;
-        Object newKey = null;
-//        instance.update(key, element, newKey);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        setUp1();
+        String key = "Juan";
+        Person upp = new Person("Diego", "Torres", "1193254110", "ABC", "", "", 1, 0);
+        Person element = upp;
+        Person newKey = upp;
+        instance.update(key, element, newKey.getFirstName());
+        assertNotNull(instance.search(upp.getFirstName()));
     }
 
     /**
      * Test of deleteAVL method, of class AVL.
      */
-    @Test
-    public void testDeleteAVL() {
-        System.out.println("deleteAVL");
-        Object key = null;
-        AVL instance = new AVL();
+//    @Test
+//    public void testDeleteAVL() {
+//        System.out.println("deleteAVL");
+//        setUp1();
+//        String key = "Juan";
 //        instance.deleteAVL(key);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
     
     
     
