@@ -4,8 +4,6 @@ import datastructure.AVL;
 import datastructure.AVLInterface;
 import datastructure.HashTable;
 import datastructure.HashTableInterface;
-import datastructure.RBT;
-import datastructure.RBTInterface;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,15 +23,14 @@ public class Database implements Serializable{
     public static final String PATH = "Final.txt";
 
     private HashTableInterface people;
-    private AVLInterface name, lastName, fullName;
-    private RBTInterface id;
+    private AVLInterface name, lastName, fullName, id;
 
     public Database() {
         this.people = new HashTable();
         this.name = new AVL();
         this.lastName = new AVL();
         this.fullName = new AVL();
-        this.id = new RBT();
+        this.id = new AVL();
     }
 
    public void loadTextFile(String csv, String csv2, String csv3, String sep)throws IOException{
@@ -68,9 +65,17 @@ public class Database implements Serializable{
                     String lName = parts2[0];
                     String pcountry = parts3[0];
                     
-                    int gender = (int) Math.floor(Math.random()*2);
+                    int gender = 0;
+                    if (parts[1].equalsIgnoreCase("boy")) {
+                        
+                         gender = 0;
+                    }else{
+                        
+                         gender = 1;
+                    }
+
                    
-                    Person p1 = new Person(finame, lName, (int) Math.floor(Math.random()*1000+100000) +"", "", (int) Math.floor(Math.random()*12+1)+"/"+(int) Math.floor(Math.random()*31+1)+"/" + (int)Math.floor(Math.random()*100+1920), pcountry, gender, Math.random()*70+150);
+                    Person p1 = new Person(finame, lName, (int) Math.floor(Math.random()*1000+100000) +"", "https://thispersondoesnotexist.com/", (int) Math.floor(Math.random()*12+1)+"/"+(int) Math.floor(Math.random()*31+1)+"/" + (int)Math.floor(Math.random()*100+1920), pcountry, gender, Math.random()*70+150);
                     name.insert(p1.getFirstName(), p1);
                     lastName.insert(p1.getLastName(), p1);
                     fullName.insert(p1.getFullName(), p1);
@@ -179,8 +184,7 @@ public class Database implements Serializable{
     
     public String searchById(String idn){
         
-        return " ";
+        return id.search(idn).toString();
     }
-    
-    
+  
 }
