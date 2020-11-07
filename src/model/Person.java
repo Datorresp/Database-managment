@@ -9,8 +9,8 @@ import java.io.Serializable;
 
 public class Person implements Comparable<Person>, Serializable{
 
-    public static final int MALE = 1;
-    public static final int FEMALE = 2;
+    public static final int MALE = 0;
+    public static final int FEMALE = 1;
     private String firstName, lastName, fullName, id, photo, birthday, country;
     private int gender;
     private double height;

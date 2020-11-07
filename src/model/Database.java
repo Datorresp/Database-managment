@@ -36,41 +36,53 @@ public class Database implements Serializable{
         this.id = new RBT();
     }
 
-    public Person loadTextFile(String csv, String sep)throws IOException{
-          
-        Person p = null;
+   public void loadTextFile(String csv, String csv2, String csv3, String sep)throws IOException{
 
-
-        if (csv != null) {
+        if (csv != null && csv2 != null && csv3 != null) {
 
             File f = new File (csv);
             FileReader fr = new  FileReader(f);
             BufferedReader br = new BufferedReader(fr);
-            int i = 0;
+            
+            File f2 = new File (csv2);
+            FileReader fr2 = new  FileReader(f2);
+            BufferedReader br2 = new BufferedReader(fr2);
+            
+            File f3 = new File (csv3);
+            FileReader fr3 = new  FileReader(f3);
+            BufferedReader br3 = new BufferedReader(fr3);
 
             String line = br.readLine();
+            String line2 = br2.readLine();
+            String line3 = br3.readLine();
 
-            while (line != null) {
+            while (line != null && line2 != null && line3 != null) {
 
-                if (line.charAt(0) != '#') {
+                if (line.charAt(0) != '#' && line2.charAt(0) != '#' && line3.charAt(0) != '#') {
 
                     String[] parts = line.split(sep);
-//                    String id = parts[0];
-//                    String name = parts[1];
-//                    String LastName = parts[2];
-
-
-//                    DECLARE OBJECT
-//                    ADD OBJECT
+                    String[] parts2 = line2.split(sep);
+                    String[] parts3 = line3.split(sep);
+                    
+                    String finame = parts[0];
+                    String lName = parts2[0];
+                    String pcountry = parts3[0];
+                    
+                    int gender = (int) Math.floor(Math.random()*2);
+                   
+                    Person p1 = new Person(finame, lName, (int) Math.floor(Math.random()*1000+100000) +"", "", (int) Math.floor(Math.random()*12+1)+"/"+(int) Math.floor(Math.random()*31+1)+"/" + (int)Math.floor(Math.random()*100+1920), pcountry, gender, Math.random()*70+150);
+                    name.insert(p1.getFirstName(), p1);
+                    lastName.insert(p1.getLastName(), p1);
+                    fullName.insert(p1.getFullName(), p1);
+                    id.insert(p1.getId(), p1);
                     line = br.readLine();
-                    i++; 
+                    line2 = br2.readLine();
+                    line3 = br.readLine();
 
                 }
             }
         }
-        return p;
     }
-    
     public static void serializacion (Object o){
 
         try{

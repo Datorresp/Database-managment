@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  *
  * @author diegoa.torres
+ * @param <K>
+ * @param <V>
  */
 public class AVLIT<K,V> implements Serializable {
     
