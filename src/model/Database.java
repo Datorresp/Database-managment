@@ -4,6 +4,7 @@ import datastructure.AVL;
 import datastructure.AVLInterface;
 import datastructure.HashTable;
 import datastructure.HashTableInterface;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,10 +16,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- *
  * @author diegoa.torres
  */
-public class Database implements Serializable{
+public class Database implements Serializable {
 
     public static final String PATH = "Final.txt";
 
@@ -33,20 +33,20 @@ public class Database implements Serializable{
         this.id = new AVL();
     }
 
-   public void loadTextFile(String csv, String csv2, String csv3, String sep)throws IOException{
+    public void loadTextFile(String csv, String csv2, String csv3, String sep, int n) throws IOException {
 
         if (csv != null && csv2 != null && csv3 != null) {
 
-            File f = new File (csv);
-            FileReader fr = new  FileReader(f);
+            File f = new File(csv);
+            FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
-            
-            File f2 = new File (csv2);
-            FileReader fr2 = new  FileReader(f2);
+
+            File f2 = new File(csv2);
+            FileReader fr2 = new FileReader(f2);
             BufferedReader br2 = new BufferedReader(fr2);
-            
-            File f3 = new File (csv3);
-            FileReader fr3 = new  FileReader(f3);
+
+            File f3 = new File(csv3);
+            FileReader fr3 = new FileReader(f3);
             BufferedReader br3 = new BufferedReader(fr3);
 
             String line = br.readLine();
@@ -57,25 +57,26 @@ public class Database implements Serializable{
 
                 if (line.charAt(0) != '#' && line2.charAt(0) != '#' && line3.charAt(0) != '#') {
 
+
                     String[] parts = line.split(sep);
                     String[] parts2 = line2.split(sep);
                     String[] parts3 = line3.split(sep);
-                    
+
                     String finame = parts[0];
                     String lName = parts2[0];
                     String pcountry = parts3[0];
-                    
+
                     int gender = 0;
                     if (parts[1].equalsIgnoreCase("boy")) {
-                        
-                         gender = 0;
-                    }else{
-                        
-                         gender = 1;
+
+                        gender = 0;
+                    } else {
+
+                        gender = 1;
                     }
 
-                   
-                    Person p1 = new Person(finame, lName, (int) Math.floor(Math.random()*1000+100000) +"", "https://thispersondoesnotexist.com/", (int) Math.floor(Math.random()*12+1)+"/"+(int) Math.floor(Math.random()*31+1)+"/" + (int)Math.floor(Math.random()*100+1920), pcountry, gender, Math.random()*70+150);
+
+                    Person p1 = new Person(finame, lName, (int) Math.floor(Math.random() * 1000 + 100000) + "", "https://thispersondoesnotexist.com/", (int) Math.floor(Math.random() * 12 + 1) + "/" + (int) Math.floor(Math.random() * 31 + 1) + "/" + (int) Math.floor(Math.random() * 100 + 1920), pcountry, gender, Math.random() * 70 + 150);
                     name.insert(p1.getFirstName(), p1);
                     lastName.insert(p1.getLastName(), p1);
                     fullName.insert(p1.getFullName(), p1);
@@ -83,14 +84,14 @@ public class Database implements Serializable{
                     line = br.readLine();
                     line2 = br2.readLine();
                     line3 = br.readLine();
-
                 }
             }
         }
     }
-    public static void serializacion (Object o){
 
-        try{
+    public static void serializacion(Object o) {
+
+        try {
 
             String rutaFichero = PATH;
 
@@ -103,23 +104,23 @@ public class Database implements Serializable{
 //            Person readPerson = (Person) ois.readObject();
             ois.close();
 
-        }catch (IOException ex) {
+        } catch (IOException ex) {
 
             ex.printStackTrace();
         }
     }
-    
-    public void addPerson(Person p){
-        
+
+    public void addPerson(Person p) {
+
         people.insert(Math.random(), p);
         name.insert(p.getFirstName(), p);
         lastName.insert(p.getLastName(), p);
         fullName.insert(p.getFullName(), p);
         id.insert(p.getId(), p);
     }
-    
-    public void update(String key, Person p){
-        
+
+    public void update(String key, Person p) {
+
         name.update(key, p, p.getFirstName());
         lastName.update(key, p, p.getLastName());
         fullName.update(key, p, p.getFullName());
@@ -161,30 +162,30 @@ public class Database implements Serializable{
 
     //
 
-    
-    public String globalSearch(String id){
-        
+
+    public String globalSearch(String id) {
+
         return people.search(id).toString();
     }
-    
-    public String searchByFirstName(String fname){
-        
+
+    public String searchByFirstName(String fname) {
+
         return name.search(fname).toString();
     }
-    
-    public String searchByLastName(String lname){
-        
+
+    public String searchByLastName(String lname) {
+
         return lastName.search(lname).toString();
     }
-    
-    public String searchByFullName(String fname){
-        
+
+    public String searchByFullName(String fname) {
+
         return fullName.search(fname).toString();
     }
-    
-    public String searchById(String idn){
-        
+
+    public String searchById(String idn) {
+
         return id.search(idn).toString();
     }
-  
+
 }
